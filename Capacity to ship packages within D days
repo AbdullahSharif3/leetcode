@@ -1,0 +1,39 @@
+class Solution {
+public:
+    bool check(vector<int> weights,int days,int c)
+    {
+        int d=0,w=0;
+        for (int i:weights)
+        {
+            w+=i;
+            if (i>c)
+                return false;
+            if (w>c)
+            {
+                w=i;
+                d++;
+            }
+        }
+        return (d+(w+c-1)/c)<=days;
+    }
+    int shipWithinDays(vector<int>& weights,int days){
+        int end=0,start;
+        for (int i:weights){
+            end+=i;
+        }
+        start=end/((int)weights.size())-1;
+        while(1){
+            int mid=(start+end)/2;
+            if (check(weights,days,mid)){
+                end=mid;
+            }
+            else{
+                start=mid;
+            }
+            if (start+1>=end){
+                break;
+            }
+        }
+        return end;   
+    }
+};
