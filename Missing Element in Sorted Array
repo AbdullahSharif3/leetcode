@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int missingElement(vector<int>& nums, int k) {
+        int cnt=INT_MAX;
+        for(int i=1;i<nums.size();i++){
+            if(nums[i-1]+k<nums[i]){
+                cnt=nums[i-1]+k;
+                break;
+            }
+            else{
+                k-=(nums[i]-nums[i-1]-1);
+            }
+        }
+        if(cnt==INT_MAX){
+            cnt=nums[nums.size()-1]+k;
+        }
+        return cnt;
+    }
+};
