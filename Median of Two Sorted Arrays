@@ -27,7 +27,8 @@ public:
         int z = merge.size();
         if(z%2==0){
             return double(merge[z/2]+merge[(z/2)-1])/2;
-        }else{
+        }
+        else{
             return double(merge[z/2]);
         }
     }
