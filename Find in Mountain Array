@@ -1,0 +1,60 @@
+/**
+ * // This is the MountainArray's API interface.
+ * // You should not implement it, or speculate about its implementation
+ * class MountainArray {
+ *   public:
+ *     int get(int index);
+ *     int length();
+ * };
+ */
+
+class Solution {
+public:
+    int findInMountainArray(int target, MountainArray &mountainArr) {
+        int start=0,end=mountainArr.length();
+        while (start+1<end){
+            int mid=(start+end)/2;
+            if (mountainArr.get(mid)<mountainArr.get(mid+1)){
+                start=mid;
+            }
+            else{
+                end=mid;
+            }
+        }
+        int start1=0,end1=start+1;
+        while (start1+1<end1){
+            int mid=(start1+end1)/2;
+            int index=mountainArr.get(mid);
+            if (target==index){
+                return mid;
+            }
+            if (target<index){
+                end1=mid;
+            }
+            else{
+                start1=mid;
+            }
+        }
+        if (mountainArr.get(start1)==target){
+            return start1;
+        }
+        start1=start+1,end1=mountainArr.length();
+        while (start1+1<end1){
+            int mid=(start1+end1)/2;
+            int index=mountainArr.get(mid);
+            if (target==index){
+                return mid;
+            }
+            if (target>index){
+                end1=mid;
+            }
+            else{
+                start1=mid;
+            }
+        }
+        if (mountainArr.get(start1)==target){
+            return start1;
+        }
+        return -1; 
+    }
+};
