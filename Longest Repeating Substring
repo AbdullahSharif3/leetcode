@@ -1,0 +1,24 @@
+#pragma GCC optimize("O2")
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+class Solution {
+public:
+    int longestRepeatingSubstring(string s) {
+        int ans=0;
+        unordered_map< string,bool> o;   
+        for(int i=0;i<s.size();i++){
+            for(int j=0;j<=i-ans;j++){
+                    string h=s.substr(j,i-j+1);
+                    if(o[h]){
+                        ans =i-j+1;
+                        break;
+                    }
+                    else
+                        o[h] = true;
+
+            }
+        }
+
+        return(ans);
+    }
+};
